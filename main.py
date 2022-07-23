@@ -20,16 +20,24 @@ for (index, row) in student_data_frame.iterrows():
 # Keyword Method with iterrows()
 # {new_key:new_value for (index, row) in df.iterrows()}
 
-#TODO 1. Create a dictionary in this format:
+#Create a dictionary in this format:
 # {"A": "Alfa", "B": "Bravo"}
 alphabet_data = pandas.read_csv("nato_phonetic_alphabet.csv")
 
 alphabet_dict = {row.letter:row.code for (index, row) in alphabet_data.iterrows()}
 
-#TODO 2. Create a list of the phonetic code words from a word that the user inputs.
+#Create a list of the phonetic code words from a word that the user inputs.
+def generate_phonetic():
+    user_input = input("Enter your input word: ").upper()
+    # add exception handling 
+    try:
+        user_list = [alphabet_dict[letter] for letter in user_input]
+    except KeyError:    # catch KeyError
+        print("Sorry, enter only letters of the alphabet please!")
+        # we want our program to loop
+        generate_phonetic()
+    else:   # if all goes well, execute this
+        print(user_list)
 
-user_input = input("Enter your input word: ").upper()
-
-user_list = [alphabet_dict[letter] for letter in user_input]
-print(user_list)
+generate_phonetic()
 
